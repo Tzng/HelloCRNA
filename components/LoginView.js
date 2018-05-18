@@ -11,19 +11,55 @@ import {
 //获取屏幕的宽度
 const Dimensions = require('Dimensions');
 const ScreenWidth = Dimensions.get('window').width;
+const BASE_URL = 'https://api.github.com/repos/facebook/react-native/events';
 
 class LoginView extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            loginname: "",
+            password: ""
+        }
+    }
+
     handlePress = ()=>{
         console.log("press");
+        this.getEvent();
     }
+
+    getEvent() {
+        // 取得 BASE_URL response 的資料
+        fetch(BASE_URL)
+            .then((res) => res.json())
+            .then((responseData) => {
+                // 單純只做 log
+                console.log(responseData);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .done();
+    }
+
     render() {
         return <View style={styles.container}>
             <Image source={require('../images/icon3.png')} style={styles.iconStyle}></Image>
             <View style={styles.inputWrapperStyle}>
-                <TextInput placeholder="输入QQ号码" style={styles.inputStyle}></TextInput>
+                <TextInput
+                    placeholder="输入QQ号码"
+                    style={styles.inputStyle}
+                    onChangeText={(text) => console.log(text)}
+                    keyboardType="numeric"
+                ></TextInput>
             </View>
             <View style={styles.inputWrapperStyle}>
-                <TextInput placeholder="输入密码" style={styles.inputStyle} keyboardType="numeric" secureTextEntry={true}></TextInput>
+                <TextInput
+                    placeholder="输入密码"
+                    style={styles.inputStyle}
+                    keyboardType="numeric"
+                    secureTextEntry={true}
+                ></TextInput>
             </View>
             {/*可以用Button
              TouchableOpacity 被点击之后，透明度发生改变

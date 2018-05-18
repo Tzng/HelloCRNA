@@ -13,7 +13,7 @@ var boxWidth = width / 3;
 
 var JsonData = require('../data/test.json');
 
-var BaseUrl = 'http://192.168.56.1:3000/images/';
+var BaseUrl = 'http://192.168.42.1:3000/images/';
 
 class BagView extends Component{
     renderBags = ()=>{

@@ -1,0 +1,20 @@
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    ScrollView
+} from 'react-native';
+
+//获取屏幕的宽度
+const Dimensions = require('Dimensions');
+const ScreenWidth = Dimensions.get('window').width;
+
+class BannerView extends Component {
+
+}
+
+module.exports = BannerView;
