@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import HeadScreen from './HeadScreen';
 
 const BaseUrl = 'http://192.168.42.1:3000/images/';
 const Dimensions = require('Dimensions');
 const ScreenWidth = Dimensions.get('window').width;
 
-export default class MyListView extends Component {
+class MyListView extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -14,21 +15,24 @@ export default class MyListView extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <FlatList
-                    keyExtractor={item => item.key.toString()}
-                    data={this.state.dataSource}
-                    renderItem={({item}) => (
-                        <View style={styles.container}>
-                            <Image source={{uri:BaseUrl+item.image}} style={styles.iconStyle}/>
-                            <View style={styles.textWrapperStyle}>
-                                <Text style={styles.titleStyle}>{item.name}</Text>
-                                <Text style={styles.moneyStyle}>￥{item.money}</Text>
+            <React.Fragment>
+                <HeadScreen title="列表"/>
+                <View style={styles.container}>
+                    <FlatList
+                        keyExtractor={item => item.key.toString()}
+                        data={this.state.dataSource}
+                        renderItem={({item}) => (
+                            <View style={styles.container}>
+                                <Image source={{uri:BaseUrl+item.image}} style={styles.iconStyle}/>
+                                <View style={styles.textWrapperStyle}>
+                                    <Text style={styles.titleStyle}>{item.name}</Text>
+                                    <Text style={styles.moneyStyle}>￥{item.money}</Text>
+                                </View>
                             </View>
-                        </View>
-                    )}
-                />
-            </View>
+                        )}
+                    />
+                </View>
+            </React.Fragment>
         );
     }
 

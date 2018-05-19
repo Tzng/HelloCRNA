@@ -6,6 +6,8 @@ import {
     Image
 } from 'react-native';
 
+import HeadScreen from './HeadScreen';
+
 //获取屏幕的宽度
 var Dimensions = require('Dimensions');
 var width = Dimensions.get('window').width;
@@ -26,9 +28,14 @@ class BagView extends Component{
         });
     }
     render(){
-        return <View style={styles.container}>
-            {this.renderBags()}
-        </View>;
+        return (
+            <React.Fragment>
+                <HeadScreen title='首页'/>
+                <View style={styles.container}>
+                    {this.renderBags()}
+                </View>
+            </React.Fragment>
+        )
     }
 }
 
