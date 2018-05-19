@@ -1,24 +1,25 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import { StyleSheet } from 'react-native';
+import { Text, StyleSheet} from 'react-native';
 //页面组件
 import DynamicScreen from './components/weixin/DynamicScreen';
 import FindScreen from './components/weixin/FindScreen';
 import MyScreen from './components/weixin/MyScreen';
 import DynamicDetailScreen from './components/weixin/DynamicDetailScreen';
+import HeadScreen from './components/HeadScreen';
 
 //底部导航栏
 const TabScreen = createBottomTabNavigator(
     {
         dynamic: {
-            screen: DynamicScreen
+            screen: DynamicScreen,
         },
         find: {
-            screen: FindScreen
+            screen: FindScreen,
         },
         my: {
-            screen: MyScreen
+            screen: MyScreen,
         },
     },
     {
@@ -56,11 +57,14 @@ const TabScreen = createBottomTabNavigator(
 const StackScreen = createStackNavigator({
     dynamicStack: {
         screen: TabScreen,
-        navigationOptions: ({navigation}) => ({
-            headerStyle:styles.headerBar,
-            headerTintColor:'#fff',
-            headerRight:(<Ionicons name="md-add" color="#fff" size={25} style={{marginRight:20}}/>),
-        }),
+        navigationOptions: ({navigation}) => {
+            return ({
+                headerStyle:styles.headerBar,
+                headerTintColor:'#fff',
+                headerRight:(<Ionicons name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+                headerTitle:"我的"
+            })
+        }
     },
     dynamicDetail: {
         path: 'people/:name',
