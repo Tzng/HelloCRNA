@@ -1,13 +1,14 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 //页面组件
 import DynamicScreen from './components/weixin/DynamicScreen';
 import FindScreen from './components/weixin/FindScreen';
 import MyScreen from './components/weixin/MyScreen';
+import DynamicDetailScreen from './components/weixin/DynamicDetailScreen';
 
 //底部导航栏
-export default createBottomTabNavigator(
+const TabScreen = createBottomTabNavigator(
     {
         dynamic: {
             screen: DynamicScreen
@@ -20,7 +21,10 @@ export default createBottomTabNavigator(
         },
     },
     {
+        //默认路由，可以不用配置，默认是第一个
+        initialRouteName: 'dynamic',
         navigationOptions: ({ navigation }) => ({
+            //返回一个组件，以在标签栏中显示。
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
@@ -32,8 +36,7 @@ export default createBottomTabNavigator(
                     iconName = `ios-person${focused ? '' : '-outline'}`;
                 }
 
-                // You can return any component that you like here! We usually use an
-                // icon component from react-native-vector-icons
+                // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
                 return <Ionicons name={iconName} size={25} color={tintColor} />;
             },
         }),
@@ -42,8 +45,30 @@ export default createBottomTabNavigator(
             inactiveTintColor: 'gray',
         },
         //改变标签时是否进行动画
-        animationEnabled: false,
+        animationEnabled: true,
         //是否允许在标签之间滑动
-        swipeEnabled: false,
+        swipeEnabled: true,
     }
-);
+)
+
+// myapp路由，这里的话会自带头部，所以还要对头部进行修改
+const StackScreen = createStackNavigator({
+    dynamicStack: {
+        screen: TabScreen
+    },
+    dynamicDetail: {
+        path: 'people/:name',
+        screen: DynamicDetailScreen,
+    },
+});
+
+export default class MyApp extends React.Component{
+    render(){
+        return (
+            <React.Fragment>
+                <StackScreen />
+            </React.Fragment>
+        )
+    }
+}
+

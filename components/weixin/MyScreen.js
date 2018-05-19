@@ -65,7 +65,8 @@ class MyScreen extends Component {
 //组件样式
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        top: 25
     },
     //发现组件样式
     findView:{

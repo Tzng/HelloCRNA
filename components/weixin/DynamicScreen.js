@@ -4,7 +4,8 @@ import {
     View,
     Text,
     ScrollView,
-    FlatList
+    FlatList,
+    Button
 } from 'react-native';
 import HeadScreen from '../HeadScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -47,6 +48,7 @@ class DynamicScreen extends Component {
                                         <Text style={styles.name}>{item.name}</Text>
                                         <Text style={styles.text}>{item.text}</Text>
                                         <Text style={styles.time}>{item.time}</Text>
+                                        <Button title="详情" onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})}></Button>
                                     </View>
                                 </View>
                             )}
