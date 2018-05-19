@@ -14,7 +14,6 @@ class FindScreen extends Component {
     render(){
         return (
             <React.Fragment>
-                <HeadScreen title="发现"></HeadScreen>
                 <View style={[styles.container,styles.findBody]}>
                     <View style={styles.findView}>
                         <Icon style={styles.findViewIcon} name="ios-contacts-outline" color="#3399FF" size={22} />
@@ -56,7 +55,6 @@ class FindScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        top:25
     },
     findView:{
         backgroundColor:'#fff',

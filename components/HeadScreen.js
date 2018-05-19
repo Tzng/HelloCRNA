@@ -12,7 +12,7 @@ class HeadScreen extends React.Component {
     render() {
         const title = (this.props.title)?this.props.title:'微信';
         return (
-            <View style={{height:35,backgroundColor:'#242529',padding:10,top:25}}>
+            <View style={{height:35,backgroundColor:'#242529',padding:10}}>
                 <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
                     <View style={{flex:1}}>
                         <Text style={{color:'#ffffff'}}>{title}</Text>

@@ -23,7 +23,6 @@ class DynamicScreen extends Component {
     render(){
         return(
             <React.Fragment>
-                <HeadScreen></HeadScreen>
                 <View style={styles.container}>
                     <View style={styles.container}>
                         <FlatList
@@ -64,7 +63,6 @@ class DynamicScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        top:10
     },
     item: {
         flex:1,

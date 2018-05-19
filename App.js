@@ -1,6 +1,7 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { StyleSheet } from 'react-native';
 //页面组件
 import DynamicScreen from './components/weixin/DynamicScreen';
 import FindScreen from './components/weixin/FindScreen';
@@ -54,13 +55,26 @@ const TabScreen = createBottomTabNavigator(
 // myapp路由，这里的话会自带头部，所以还要对头部进行修改
 const StackScreen = createStackNavigator({
     dynamicStack: {
-        screen: TabScreen
+        screen: TabScreen,
+        navigationOptions: ({navigation}) => ({
+            headerStyle:styles.headerBar,
+            headerTintColor:'#fff',
+            headerRight:(<Ionicons name="md-add" color="#fff" size={25} style={{marginRight:20}}/>),
+        }),
     },
     dynamicDetail: {
         path: 'people/:name',
         screen: DynamicDetailScreen,
     },
 });
+
+const styles = StyleSheet.create({
+    //header样式
+    headerBar:{
+        backgroundColor:'#242529',
+        height: 45
+    }
+})
 
 export default class MyApp extends React.Component{
     render(){
