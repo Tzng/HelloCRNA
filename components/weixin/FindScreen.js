@@ -5,6 +5,12 @@ import HeadScreen from '../HeadScreen';
 
 //发现组件
 class FindScreen extends Component {
+
+    //路由配置
+    static navigationOptions = {
+        title: '发现',
+    }
+
     render(){
         return (
             <React.Fragment>

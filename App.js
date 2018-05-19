@@ -1,27 +1,34 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation';
-import SettingsScreen from './components/SettingsScreen';
+//页面组件
 import DynamicScreen from './components/weixin/DynamicScreen';
 import FindScreen from './components/weixin/FindScreen';
+import MyScreen from './components/weixin/MyScreen';
 
 //底部导航栏
 export default createBottomTabNavigator(
     {
-        动态: DynamicScreen,
-        发现: FindScreen,
-        我的: SettingsScreen,
+        dynamic: {
+            screen: DynamicScreen
+        },
+        find: {
+            screen: FindScreen
+        },
+        my: {
+            screen: MyScreen
+        },
     },
     {
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
-                if (routeName === '动态') {
+                if (routeName === 'dynamic') {
                     iconName = `ios-text${focused ? '' : '-outline'}`;
-                } else if (routeName === '发现') {
+                } else if (routeName === 'find') {
                     iconName = `ios-bulb${focused ? '' : '-outline'}`;
-                } else if (routeName === '我的') {
+                } else if (routeName === 'my') {
                     iconName = `ios-person${focused ? '' : '-outline'}`;
                 }
 

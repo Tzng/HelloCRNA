@@ -13,6 +13,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
  * 动态组件，用来显示动态信息，列表的形式
  */
 class DynamicScreen extends Component {
+
+    //路由配置
+    static navigationOptions = {
+        title: '动态',
+    }
+
     render(){
         return(
             <React.Fragment>
