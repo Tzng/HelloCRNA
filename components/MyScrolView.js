@@ -1,38 +1,31 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    Text,
     View,
-    Image,
-    TextInput,
-    TouchableOpacity,
+    Text,
     ScrollView
 } from 'react-native';
 
-//获取屏幕的宽度
 const Dimensions = require('Dimensions');
 const ScreenWidth = Dimensions.get('window').width;
 
-class MyScrolView extends  Component {
-
-    render () {
-        return(
-            <ScrollView
-                horizontal=true
-            >
-                <View style={{backgroundColor:"red",width:100,height:100}}>
-                    <Text>11</Text>
-                </View>
-                <View style={{backgroundColor:"blue",width:100,height:100}}>
-                    <Text>11</Text>
-                </View>
-                <View style={{backgroundColor:"yellow",width:100,height:100}}>
-                    <Text>11</Text>
-                </View>
-            </ScrollView>
-        )
+class MyScrollView extends React.Component{
+    renderChild = ()=>{
+        const colors = ['red','green','blue','yellow'];
+        return colors.map((item,i)=>{
+            return <View key={`key${i}`} style={{backgroundColor:item,width:ScreenWidth,height:200}}>
+                <Text>{i}</Text>
+            </View>;
+        });
     }
-
+    render(){
+        return <ScrollView
+            horizontal={true}
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}>
+            {this.renderChild()}
+        </ScrollView>;
+    }
 }
 
-module.exports = MyScrolView;
+module.exports = MyScrollView;
