@@ -104,4 +104,4 @@ const MyStackScreen = createStackNavigator({
     },
 })
 
-module.exports = MyStackScreen;
+module.exports = MyScreen;

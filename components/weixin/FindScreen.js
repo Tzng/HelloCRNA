@@ -94,4 +94,4 @@ const FindStackScreen = createStackNavigator({
     },
 })
 
-module.exports = FindStackScreen;
+module.exports = FindScreen;

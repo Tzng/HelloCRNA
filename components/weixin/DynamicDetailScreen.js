@@ -10,7 +10,7 @@ class DynamicDetailScreen extends React.Component {
         let headerRight = () => (
             <Button
                 title="Save"
-                onPress={params.handleSave?params.handleSave:null}
+                onPress={params.handleSave ? params.handleSave:() => null}
             />
         );
 

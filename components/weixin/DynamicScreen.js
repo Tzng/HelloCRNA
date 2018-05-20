@@ -19,13 +19,6 @@ class DynamicScreen extends Component {
     //路由配置
     static navigationOptions = {
         title: '动态',
-        headerStyle:{
-            backgroundColor:'#242529',
-            height: 45
-        },
-        headerTintColor:'#fff',
-        headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
-        headerTitle:"动态"
     }
 
     render(){
@@ -122,9 +115,9 @@ const DynamicStackScreen = createStackNavigator(
     },
     //第二个参数 StackNavigatorConfig
     {
-        //我如果设置头部隐藏，那么会把所有组件的头部都隐藏了~那么就得每一个组件都进行头部设置了~
-        //headerMode: 'none'
+        //headerMode: 'none',
+        headerTitle: '动态',
     }
 )
 
-module.exports = DynamicStackScreen;
+module.exports = DynamicScreen;
