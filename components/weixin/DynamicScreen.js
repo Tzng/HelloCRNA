@@ -100,15 +100,31 @@ const styles = StyleSheet.create({
     }
 });
 
-// 路由，这里的话会自带头部，所以还要对头部进行修改
-const DynamicStackScreen = createStackNavigator({
-    dynamic: {
-        screen: DynamicScreen,
+// 如果你想导航到一个页面，就按照下面的方式创建它
+const DynamicStackScreen = createStackNavigator(
+    //第一个参数RouteConfigs
+    {
+        dynamic: {
+            screen: DynamicScreen,
+        },
+        // DynamicDetailScreen 就是一个将要显示在屏幕上的 React 组件
+        dynamicdetail: {
+            // 可选的：当在 Web 应用程序中进行深度链接或使用 react-navigation 时，才会用到 path
+            path: 'dynamicdetail/:name',
+            // 当 DynamicDetailScreen 被 StackNavigator 加载的时候，它会被赋予一个 navigation 属性
+            screen: DynamicDetailScreen,
+            // 可选的：可以在这里重写 navigationOptions
+/*            navigationOptions: ({navigation}) => ({
+                title: `页面~ ${navigation.state.params.name}`,
+            })*/
+        },
+        //在这后面还能添加其他的路由
     },
-    dynamicdetail: {
-        path: 'dynamicdetail/:name',
-        screen: DynamicDetailScreen,
+    //第二个参数 StackNavigatorConfig
+    {
+        //我如果设置头部隐藏，那么会把所有组件的头部都隐藏了~那么就得每一个组件都进行头部设置了~
+        //headerMode: 'none'
     }
-})
+)
 
 module.exports = DynamicStackScreen;
