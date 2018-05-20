@@ -7,7 +7,8 @@ import {
     FlatList,
     Button
 } from 'react-native';
-import HeadScreen from '../HeadScreen';
+import { createStackNavigator } from 'react-navigation';
+import DynamicDetailScreen from './DynamicDetailScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 /**
@@ -18,6 +19,13 @@ class DynamicScreen extends Component {
     //路由配置
     static navigationOptions = {
         title: '动态',
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+        headerTitle:"动态"
     }
 
     render(){
@@ -28,15 +36,15 @@ class DynamicScreen extends Component {
                         <FlatList
                             data={[
                                 {key:'1',name:'张三',text:'我不知道说什么！想说什么然后想想又不知道说什么了！希望最底层的孩子都有梦想，都能有承载梦想的力量！谢谢捐款的朋友，不要忘记那些被忘记的孩子',time:'2017-01-02 10:20:33'},
-                                {key:'2',name:'xiongshi1998',text:'出生无法选择，但人生可以选择',time:'2017-01-02 10:20:33'},
-                                {key:'3',name:'2222',text:'过多的关注和曝光会不会对孩子的正常生活有影响？一阵风似的离开后，孩子会不会有点失落？',time:'2017-01-02 10:20:33'},
-                                {key:'4',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'5',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'6',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'7',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'8',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'9',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
-                                {key:'10',name:'2222',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'}
+                                {key:'2',name:'李四',text:'出生无法选择，但人生可以选择',time:'2017-01-02 10:20:33'},
+                                {key:'3',name:'王五 ',text:'过多的关注和曝光会不会对孩子的正常生活有影响？一阵风似的离开后，孩子会不会有点失落？',time:'2017-01-02 10:20:33'},
+                                {key:'4',name:'测',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'5',name:'我',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'6',name:'上上上',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'7',name:'学习',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'8',name:'323',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'9',name:'发',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'},
+                                {key:'10',name:'啊',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'}
                             ]}
                             renderItem={({item}) => (
                                 <View style={styles.item}>
@@ -47,7 +55,8 @@ class DynamicScreen extends Component {
                                         <Text style={styles.name}>{item.name}</Text>
                                         <Text style={styles.text}>{item.text}</Text>
                                         <Text style={styles.time}>{item.time}</Text>
-                                        <Button title="详情" onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})}></Button>
+                                        <Button title="详情" onPress={()=> {console.log(this.props.navigation);this.props.navigation.push('dynamicdetail',{name:item.name})}}></Button>
+                                        {/*<Button title="详情" onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})}></Button>*/}
                                     </View>
                                 </View>
                             )}
@@ -83,7 +92,23 @@ const styles = StyleSheet.create({
         color:'gray',
         fontSize:12,
         marginTop:8
+    },
+    //header样式
+    headerBar:{
+        backgroundColor:'#242529',
+        height: 45
     }
 });
 
-module.exports = DynamicScreen;
+// 路由，这里的话会自带头部，所以还要对头部进行修改
+const DynamicStackScreen = createStackNavigator({
+    dynamic: {
+        screen: DynamicScreen,
+    },
+    dynamicdetail: {
+        path: 'dynamicdetail/:name',
+        screen: DynamicDetailScreen,
+    }
+})
+
+module.exports = DynamicStackScreen;

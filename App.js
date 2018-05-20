@@ -3,23 +3,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Text, StyleSheet} from 'react-native';
 //页面组件
-import DynamicScreen from './components/weixin/DynamicScreen';
-import FindScreen from './components/weixin/FindScreen';
-import MyScreen from './components/weixin/MyScreen';
-import DynamicDetailScreen from './components/weixin/DynamicDetailScreen';
-import HeadScreen from './components/HeadScreen';
+import DynamicStackScreen from './components/weixin/DynamicScreen';
+import FindStackScreen from './components/weixin/FindScreen';
+import MyStackScreen from './components/weixin/MyScreen';
 
 //底部导航栏
 const TabScreen = createBottomTabNavigator(
     {
         dynamic: {
-            screen: DynamicScreen,
+            screen: DynamicStackScreen,
         },
         find: {
-            screen: FindScreen,
+            screen: FindStackScreen,
         },
         my: {
-            screen: MyScreen,
+            screen: MyStackScreen,
         },
     },
     {
@@ -53,38 +51,11 @@ const TabScreen = createBottomTabNavigator(
     }
 )
 
-// myapp路由，这里的话会自带头部，所以还要对头部进行修改
-const StackScreen = createStackNavigator({
-    dynamicStack: {
-        screen: TabScreen,
-        navigationOptions: ({navigation}) => {
-            return ({
-                headerStyle:styles.headerBar,
-                headerTintColor:'#fff',
-                headerRight:(<Ionicons name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
-                headerTitle:"我的"
-            })
-        }
-    },
-    dynamicDetail: {
-        path: 'people/:name',
-        screen: DynamicDetailScreen,
-    },
-});
-
-const styles = StyleSheet.create({
-    //header样式
-    headerBar:{
-        backgroundColor:'#242529',
-        height: 45
-    }
-})
-
 export default class MyApp extends React.Component{
     render(){
         return (
             <React.Fragment>
-                <StackScreen />
+                <TabScreen />
             </React.Fragment>
         )
     }

@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import HeadScreen from '../HeadScreen';
+import { createStackNavigator } from 'react-navigation';
 
 //发现组件
 class FindScreen extends Component {
@@ -9,6 +9,13 @@ class FindScreen extends Component {
     //路由配置
     static navigationOptions = {
         title: '发现',
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+        headerTitle:"发现"
     }
 
     render(){
@@ -80,4 +87,11 @@ const styles = StyleSheet.create({
     }
 });
 
-module.exports = FindScreen;
+// 路由，这里的话会自带头部，所以还要对头部进行修改
+const FindStackScreen = createStackNavigator({
+    dynamicStack: {
+        screen: FindScreen,
+    },
+})
+
+module.exports = FindStackScreen;

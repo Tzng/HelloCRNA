@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation';
-import HeadScreen from '../HeadScreen';
 
 //我的组件
 class MyScreen extends Component {
@@ -10,6 +9,13 @@ class MyScreen extends Component {
     //路由配置
     static navigationOptions = {
         title: '我的',
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+        headerTitle:"我的"
     }
 
     render(){
@@ -91,4 +97,11 @@ const styles = StyleSheet.create({
     }
 });
 
-module.exports = MyScreen;
+// 路由，这里的话会自带头部，所以还要对头部进行修改
+const MyStackScreen = createStackNavigator({
+    my: {
+        screen: MyScreen,
+    },
+})
+
+module.exports = MyStackScreen;
