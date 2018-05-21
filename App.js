@@ -25,42 +25,40 @@ const TabScreen = createBottomTabNavigator(
     {
         //默认路由，可以不用配置，默认是第一个
         initialRouteName: 'dynamic',
-        navigationOptions: ({ navigation }) => ({
-            title:({navigation}) => {
-                const { routeName } = navigation.state;
-                //console.log(routeName);
-                let tabName;
-                //循环判断改变三个底部图标的icon，带outline为未选中
+        navigationOptions: ({ navigation }) => {
+            const { routeName } = navigation.state;
+            let tabTitle = () => {
                 if (routeName === 'dynamic') {
-                    tabName = '动态';
+                    tabTitle = "动态";
                 } else if (routeName === 'find') {
-                    tabName = '发现';
+                    tabTitle = "发现";
                 } else if (routeName === 'my') {
-                    tabName = '我的';
+                    tabTitle = "我的";
                 }
-                // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
-                return tabName;
-            },
-            //返回一个组件，以在标签栏中显示。
-            tabBarIcon: ({ focused, tintColor }) => {
-                const { routeName } = navigation.state;
-                //console.log(routeName);
-                let iconName;
-                //循环判断改变三个底部图标的icon，带outline为未选中
-                if (routeName === 'dynamic') {
-                    iconName = `ios-text${focused ? '' : '-outline'}`;
-                } else if (routeName === 'find') {
-                    iconName = `ios-bulb${focused ? '' : '-outline'}`;
-                } else if (routeName === 'my') {
-                    iconName = `ios-person${focused ? '' : '-outline'}`;
+                return tabTitle;
+            };
+            return {
+                title: tabTitle(),
+                //返回一个组件，以在标签栏中显示。
+                tabBarIcon: ({ focused, tintColor }) => {
+                    //console.log(routeName);
+                    let iconName;
+                    //循环判断改变三个底部图标的icon，带outline为未选中
+                    if (routeName === 'dynamic') {
+                        iconName = `ios-text${focused ? '' : '-outline'}`;
+                    } else if (routeName === 'find') {
+                        iconName = `ios-bulb${focused ? '' : '-outline'}`;
+                    } else if (routeName === 'my') {
+                        iconName = `ios-person${focused ? '' : '-outline'}`;
+                    }
+                    // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
+                    return <Ionicons name={iconName} size={25} color={tintColor} />;
+                },
+                tabBarOnPress: ({previousScene,scene,jumpToIndex})=>{
+                    console.log(jumpToIndex)
                 }
-                // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
-                return <Ionicons name={iconName} size={25} color={tintColor} />;
-            },
-            tabBarOnPress: ({previousScene,scene,jumpToIndex})=>{
-                console.log(jumpToIndex)
             }
-        }),
+        },
         tabBarOptions: {
             activeTintColor: 'tomato',
             inactiveTintColor: 'gray',

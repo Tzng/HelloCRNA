@@ -14,7 +14,7 @@ class FindScreen extends Component {
             height: 45
         },
         headerTintColor:'#fff',
-        headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+        headerRight:(<Icon name="ios-search-outline" color="#fff" size={25} style={{marginRight:20}}/>),
         headerTitle:"发现"
     }
 
@@ -94,4 +94,4 @@ const FindStackScreen = createStackNavigator({
     },
 })
 
-module.exports = FindScreen;
+module.exports = FindStackScreen;

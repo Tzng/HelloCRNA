@@ -6,19 +6,16 @@ import { createStackNavigator } from 'react-navigation';
 //我的组件
 class MyScreen extends Component {
 
-    //覆盖共享的navigationOptions
-
-    static navigationOptions = ({ navigation, navigationOptions }) => {
-        const { params } = navigation.state;
-        return {
-            title: "你好",
-            /* These values are used instead of the shared configuration! */
-            headerStyle: {
-                backgroundColor: "#2f27ff",
-            },
-            headerTintColor: "#13dfff",
-        };
-    };
+    //路由配置
+    static navigationOptions = {
+        title: '我的',
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="ios-mail" color="#fff" size={25} style={{marginRight:20}}/>),
+    }
 
     render(){
         return (

@@ -19,6 +19,12 @@ class DynamicScreen extends Component {
     //路由配置
     static navigationOptions = {
         title: '动态',
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="md-add" color="#fff" size={25} style={{marginRight:20}}/>),
     }
 
     render(){
@@ -107,9 +113,9 @@ const DynamicStackScreen = createStackNavigator(
             // 当 DynamicDetailScreen 被 StackNavigator 加载的时候，它会被赋予一个 navigation 属性
             screen: DynamicDetailScreen,
             // 可选的：可以在这里重写 navigationOptions
-/*            navigationOptions: ({navigation}) => ({
-                title: `页面~ ${navigation.state.params.name}`,
-            })*/
+            /*            navigationOptions: ({navigation}) => ({
+                            title: `页面~ ${navigation.state.params.name}`,
+                        })*/
         },
         //在这后面还能添加其他的路由
     },

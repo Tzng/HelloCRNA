@@ -3,13 +3,15 @@ import { ActivityIndicator, FlatList, StyleSheet, Text, View, Image, Button } fr
 import { createStackNavigator } from 'react-navigation';
 //动态组件详情组件
 class DynamicDetailScreen extends React.Component {
+
+    //设置组件导航
     static navigationOptions = ({navigation}) => {
 
         const { params = {} } = navigation.state;
 
         let headerRight = () => (
             <Button
-                title="Save"
+                title="保存"
                 onPress={params.handleSave ? params.handleSave:() => null}
             />
         );
