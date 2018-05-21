@@ -120,4 +120,4 @@ const DynamicStackScreen = createStackNavigator(
     }
 )
 
-module.exports = DynamicScreen;
+module.exports = DynamicStackScreen;

@@ -26,6 +26,21 @@ const TabScreen = createBottomTabNavigator(
         //默认路由，可以不用配置，默认是第一个
         initialRouteName: 'dynamic',
         navigationOptions: ({ navigation }) => ({
+            title:({navigation}) => {
+                const { routeName } = navigation.state;
+                //console.log(routeName);
+                let tabName;
+                //循环判断改变三个底部图标的icon，带outline为未选中
+                if (routeName === 'dynamic') {
+                    tabName = '动态';
+                } else if (routeName === 'find') {
+                    tabName = '发现';
+                } else if (routeName === 'my') {
+                    tabName = '我的';
+                }
+                // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
+                return tabName;
+            },
             //返回一个组件，以在标签栏中显示。
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
@@ -34,20 +49,11 @@ const TabScreen = createBottomTabNavigator(
                 //循环判断改变三个底部图标的icon，带outline为未选中
                 if (routeName === 'dynamic') {
                     iconName = `ios-text${focused ? '' : '-outline'}`;
-                    if(focused){
-                        //选中
-                        //navigation.setParams({sss: "213"});
-                        console.log(iconName)
-                        title = 'dynamic';
-                    }else{
-                        console.log('dynamic')
-                    }
                 } else if (routeName === 'find') {
                     iconName = `ios-bulb${focused ? '' : '-outline'}`;
                 } else if (routeName === 'my') {
                     iconName = `ios-person${focused ? '' : '-outline'}`;
                 }
-
                 // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
                 return <Ionicons name={iconName} size={25} color={tintColor} />;
             },
@@ -71,28 +77,30 @@ const StackScreen = createStackNavigator({
     //底部导航
     dynamicStack: {
         screen: TabScreen,
-        navigationOptions: ({navigation}) => {
-
-            console.log(navigation.state);
-
-            let headerTitle = () => {
-                navigation.state.routes.map((item) => {
-                    console.log(item);
-                })
-            }
-
-            return ({
-                headerStyle:styles.headerBar,
-                headerTintColor:'#fff',
-                headerRight:(<Ionicons name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
-            })
-        }
     },
     //详情页
     dynamicdetail: {
         path: 'dynamicdetail/:name',
         screen: DynamicDetailScreen,
-    },
+    }
+},{
+    /* The header config from HomeScreen is now here */
+    navigationOptions: ({navigation}) => {
+
+        console.log(navigation.state);
+
+        let headerTitle = () => {
+            navigation.state.routes.map((item) => {
+                console.log(item);
+            })
+        }
+
+        return ({
+            headerStyle:styles.headerBar,
+            headerTintColor:'#fff',
+            headerRight:(<Ionicons name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+        })
+    }
 });
 
 const styles = StyleSheet.create({
@@ -114,7 +122,7 @@ export default class MyApp extends React.Component{
     render(){
         return (
             <React.Fragment>
-                <StackScreen />
+                <TabScreen />
             </React.Fragment>
         )
     }
