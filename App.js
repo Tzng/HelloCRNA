@@ -7,7 +7,6 @@ import DynamicScreen from './components/weixin/DynamicScreen';
 import FindScreen from './components/weixin/FindScreen';
 import MyScreen from './components/weixin/MyScreen';
 import DynamicDetailScreen from './components/weixin/DynamicDetailScreen';
-import HeadScreen from './components/HeadScreen';
 
 //底部导航栏
 const TabScreen = createBottomTabNavigator(
@@ -25,38 +24,29 @@ const TabScreen = createBottomTabNavigator(
     {
         //默认路由，可以不用配置，默认是第一个
         initialRouteName: 'dynamic',
-        navigationOptions: ({ navigation }) => {
-            const { routeName } = navigation.state;
-            let tabTitle = () => {
-                if (routeName === 'dynamic') {
-                    tabTitle = "动态";
-                } else if (routeName === 'find') {
-                    tabTitle = "发现";
-                } else if (routeName === 'my') {
-                    tabTitle = "我的";
-                }
-                return tabTitle;
-            };
-            return {
-                title: tabTitle(),
-                //返回一个组件，以在标签栏中显示。
-                tabBarIcon: ({ focused, tintColor }) => {
-                    //console.log(routeName);
-                    let iconName;
-                    //循环判断改变三个底部图标的icon，带outline为未选中
-                    if (routeName === 'dynamic') {
-                        iconName = `ios-text${focused ? '' : '-outline'}`;
-                    } else if (routeName === 'find') {
-                        iconName = `ios-bulb${focused ? '' : '-outline'}`;
-                    } else if (routeName === 'my') {
-                        iconName = `ios-person${focused ? '' : '-outline'}`;
-                    }
-                    // 你可以返回任何你喜欢的组件，我们通常返回的会是一个图标组件
-                    return <Ionicons name={iconName} size={25} color={tintColor} />;
-                },
-                tabBarOnPress: ({previousScene,scene,jumpToIndex})=>{
-                    console.log(jumpToIndex)
-                }
+        tabBarPosition: 'bottom',//选项卡位置
+        animationEnabled: true,
+        tabBarOptions: {
+            activeTintColor: '#28a745',//选中颜色
+            inactiveTintColor:'#232323',//未选中颜色
+            //设置选项卡的背景颜色
+            style: {
+                backgroundColor: '#F2F2F2'
+            },
+            //去掉安卓点击之后的小黄线
+            indicatorStyle: {
+                height: 0
+            },
+            //是否显示icon图标
+            showIcon:true,
+            //选项卡样式
+            tabStyle:{
+                height:46,
+            },
+            //icon样式
+            iconStyle:{
+                marginBottom:-6,
+                marginTop:10
             }
         },
         tabBarOptions: {
