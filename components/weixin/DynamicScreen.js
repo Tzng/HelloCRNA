@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet,View, Text,Button,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation';
+import DynamicDetailScreen from './DynamicDetailScreen';
 
 //动态组件
 export default class DynamicScreen extends React.Component {
@@ -36,7 +37,7 @@ export default class DynamicScreen extends React.Component {
                                 <View style={{flex:9}}>
                                     <Text onPress={() => this.props.navigation.navigate('find')} style={styles.name}>{item.name}</Text>
                                     <Text onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})} style={styles.text}>{item.text}</Text>
-                                    <Button title="详情" onPress={()=> {console.log(this.props.navigation);this.props.navigation.push('dynamicdetail',{name:item.name})}}></Button>
+                                    <Button title="详情" onPress={()=> {console.log(this.props.navigation);this.props.navigation.push('dynamicDetail',{name:item.name})}}></Button>
                                     <Text style={styles.time}>{item.time}</Text>
                                 </View>
                             </View>
@@ -104,6 +105,14 @@ const DynamicStackScreen = createStackNavigator(
     {
         dynamic: {
             screen: DynamicScreen,
+            navigationOptions:{
+                headerStyle:{
+                    backgroundColor:'#242529',
+                    height: 45
+                },
+                headerTintColor:'#fff',
+                headerRight:(<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>),
+            }
         },
         // DynamicDetailScreen 就是一个将要显示在屏幕上的 React 组件
         dynamicdetail: {
