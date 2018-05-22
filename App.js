@@ -1,6 +1,6 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import { Text, StyleSheet} from 'react-native';
 //页面组件
 import DynamicScreen from './components/weixin/DynamicScreen';
@@ -9,7 +9,7 @@ import MyScreen from './components/weixin/MyScreen';
 import DynamicDetailScreen from './components/weixin/DynamicDetailScreen';
 
 //底部导航栏
-const TabScreen = createBottomTabNavigator(
+const TabScreen = createMaterialTopTabNavigator(
     {
         dynamic: {
             screen: DynamicScreen,
