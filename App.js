@@ -26,12 +26,16 @@ class DetailsScreen extends React.Component {
                     onPress={() => this.props.navigation.push('Details')}
                 />
                 <Button
-                    title="Go to Home"
+                    title="跳转到指定的组件去"
                     onPress={() => this.props.navigation.navigate('Home')}
                 />
                 <Button
                     title="Go back"
                     onPress={() => this.props.navigation.goBack()}
+                />
+                <Button
+                    title="让我们跳转到顶部去吧"
+                    onPress={() => this.props.navigation.popToTop()}
                 />
             </View>
         );
