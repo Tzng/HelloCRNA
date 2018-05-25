@@ -9,7 +9,12 @@ class HomeScreen extends React.Component {
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
+                    //onPress={() => this.props.navigation.navigate('Details')}
+                    //导航栏传递参数
+                    onPress={() => this.props.navigation.navigate('Details',{
+                        itemId:86,
+                        otherParam: '其他参数'
+                    })}
                 />
             </View>
         );
@@ -18,12 +23,26 @@ class HomeScreen extends React.Component {
 
 class DetailsScreen extends React.Component {
     render() {
+
+        /* 得到这些参数，然后 */
+        const { navigation } = this.props;
+        const itemId = navigation.getParam('itemId','NO-ID');
+        const otherParam = navigation.getParam('otherParam', 'some default value');
+
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Details Screen</Text>
+                <Text>itemId: {JSON.stringify(itemId)}</Text>
+                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
                 <Button
                     title="Go to Details... again"
                     onPress={() => this.props.navigation.push('Details')}
+                />
+                <Button
+                    title="传递个参数试试啊"
+                    onPress={() => this.props.navigation.push('Details',{
+                        itemId: Math.floor(Math.random() * 100)
+                    })}
                 />
                 <Button
                     title="跳转到指定的组件去"
