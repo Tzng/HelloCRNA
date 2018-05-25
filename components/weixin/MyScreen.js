@@ -1,14 +1,21 @@
 import React from 'react';
 import { FlatList, StyleSheet,View, Text,Button,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from 'react-navigation';
 
 //我的组件
-export default class DynamicScreen extends React.Component {
+export default class MyScreen extends React.Component {
     static navigationOptions = {
         title: '我的',
         tabBarIcon: ({tintColor}) => (
             <Icon name="ios-person-outline" size={26} color={tintColor} />
         ),
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="ios-mail" color="#fff" size={25} style={{marginRight:20}}/>),
     }
     render(){
         return (
@@ -106,3 +113,12 @@ const styles = StyleSheet.create({
         borderTopColor:'#EBEBEB'
     }
 });
+
+// 路由，这里的话会自带头部，所以还要对头部进行修改
+const MyStackScreen = createStackNavigator({
+    my: {
+        screen: MyScreen,
+    },
+})
+
+module.exports = MyStackScreen;

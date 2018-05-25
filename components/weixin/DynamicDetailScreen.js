@@ -72,4 +72,11 @@ const styles = StyleSheet.create({
     }
 });
 
+// 路由，这里的话会自带头部，所以还要对头部进行修改
+const DynamicStackDetailScreen = createStackNavigator({
+    my: {
+        screen: DynamicDetailScreen,
+    },
+})
+
 module.exports = DynamicDetailScreen;
