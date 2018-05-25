@@ -37,6 +37,10 @@ class DetailsScreen extends React.Component {
                     title="让我们跳转到顶部去吧"
                     onPress={() => this.props.navigation.popToTop()}
                 />
+                <Button
+                    title="回到堆里去"
+                    onPress={() => this.props.navigation.pop()}
+                />
             </View>
         );
     }
