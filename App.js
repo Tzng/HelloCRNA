@@ -1,11 +1,21 @@
 import React from 'react';
-import { Button, View, Text ,TextInput} from 'react-native';
+import { Button, View, Text ,TextInput, StyleSheet} from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
+//获取屏幕的宽度
+const Dimensions = require('Dimensions');
+const ScreenWidth = Dimensions.get('window').width;
 class HomeScreen extends React.Component {
 
     static navigationOptions = {
         title: '首页',
+        headerStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTitleColor: "#fff",
+        headerTitleStyle: {
+            fontWeight:'bold',
+        },
     };
 
     render() {
@@ -29,20 +39,20 @@ class HomeScreen extends React.Component {
 class DetailsScreen extends React.Component {
 
     //通过获取参数来显示头部内容，返回一个对象
-    static navigationOptions = ({ navigation  }) => {
+    static navigationOptions = ({navigation}) => {
         //使用getParam来获取传递的参数，可以配置两个属性，如果itemId没有获取到，那么就返回后面那个
-        const titleNum = navigation.getParam('itemId','没有参数哦').toString();
+        const titleNum = navigation.getParam('itemId', '没有参数哦').toString();
         //如果这么取的话，可能会出现params为undefined的情况
-        const { params } = navigation.state;
+        const {params} = navigation.state;
         console.log(titleNum);
 
         return {
             //由于java的原因，所以这个必须得是字符串
-            title:  titleNum,
+            title: titleNum,
         }
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             titleText: ""
@@ -52,13 +62,13 @@ class DetailsScreen extends React.Component {
     render() {
 
         /* 得到这些参数，然后 */
-        const { navigation } = this.props;
-        const itemId = navigation.getParam('itemId','NO-ID');
+        const {navigation} = this.props;
+        const itemId = navigation.getParam('itemId', 'NO-ID');
         //getParam获取路由传递的参数，一般是由列表页到详情页进行的
         const otherParam = navigation.getParam('otherParam', 'some default value');
 
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Text>Details Screen</Text>
                 <Text>itemId: {JSON.stringify(itemId)}</Text>
                 <Text>otherParam: {JSON.stringify(otherParam)}</Text>
@@ -68,7 +78,7 @@ class DetailsScreen extends React.Component {
                 />
                 <Button
                     title="传递个参数试试啊"
-                    onPress={() => this.props.navigation.push('Details',{
+                    onPress={() => this.props.navigation.push('Details', {
                         itemId: Math.floor(Math.random() * 100)
                     })}
                 />
@@ -93,6 +103,7 @@ class DetailsScreen extends React.Component {
                     onPress={() => this.props.navigation.setParams({itemId: this.state.titleText})}
                 />
                 <TextInput
+                    style={{width: 80, height: 80,}}
                     placeholder="请输入标题"
                     onChangeText={(text) => this.setState({titleText: text})}
                 ></TextInput>
