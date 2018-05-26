@@ -39,7 +39,7 @@ class HomeScreen extends React.Component {
 class DetailsScreen extends React.Component {
 
     //通过获取参数来显示头部内容，返回一个对象
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = ({ navigation, navigationOptions }) => {
         //使用getParam来获取传递的参数，可以配置两个属性，如果itemId没有获取到，那么就返回后面那个
         const titleNum = navigation.getParam('itemId', '没有参数哦').toString();
         //如果这么取的话，可能会出现params为undefined的情况
@@ -49,6 +49,10 @@ class DetailsScreen extends React.Component {
         return {
             //由于java的原因，所以这个必须得是字符串
             title: titleNum,
+            headerStyle: {
+                backgroundColor: navigationOptions.headerTintColor,
+            },
+            headerTintColor: navigationOptions.headerStyle.backgroundColor,
         }
     };
 
