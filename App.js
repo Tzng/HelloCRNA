@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text ,TextInput} from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 class HomeScreen extends React.Component {
@@ -42,6 +42,13 @@ class DetailsScreen extends React.Component {
         }
     };
 
+    constructor(props){
+        super(props);
+        this.state = {
+            titleText: ""
+        }
+    }
+
     render() {
 
         /* 得到这些参数，然后 */
@@ -81,6 +88,14 @@ class DetailsScreen extends React.Component {
                     title="回到堆里去"
                     onPress={() => this.props.navigation.pop()}
                 />
+                <Button
+                    title="修改标题"
+                    onPress={() => this.props.navigation.setParams({itemId: this.state.titleText})}
+                />
+                <TextInput
+                    placeholder="请输入标题"
+                    onChangeText={(text) => this.setState({titleText: text})}
+                ></TextInput>
             </View>
         );
     }
