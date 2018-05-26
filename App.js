@@ -3,6 +3,11 @@ import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 class HomeScreen extends React.Component {
+
+    static navigationOptions = {
+        title: '首页',
+    };
+
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -22,11 +27,17 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
+
+    static navigationOptions = {
+        title: '内容',
+    };
+
     render() {
 
         /* 得到这些参数，然后 */
         const { navigation } = this.props;
         const itemId = navigation.getParam('itemId','NO-ID');
+        //getParam获取路由传递的参数，一般是由列表页到详情页进行的
         const otherParam = navigation.getParam('otherParam', 'some default value');
 
         return (
