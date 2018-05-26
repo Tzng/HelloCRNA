@@ -123,6 +123,15 @@ const RootStack = createStackNavigator(
     },
     {
         initialRouteName: 'Home',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+        }
     }
 );
 
