@@ -28,6 +28,13 @@ class HomeScreen extends React.Component {
         headerTitleStyle: {
             fontWeight:'bold',
         },
+        //再放一个按钮
+        headerRight: (
+            <Button
+                onPress = {() => alert("我是按钮")}
+                title = "按钮"
+            />
+        ),
         //放了一个图片
         headerTitle: <LogoTitle />,
     };
