@@ -1,15 +1,38 @@
 import React from 'react';
 import { FlatList, StyleSheet,View, Text,Button,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from 'react-navigation';
 
 //发现组件
 export default class FindScreen extends React.Component {
-    static navigationOptions = {
-        title: '发现',
-        tabBarIcon: ({tintColor}) => (
-            <Icon name="ios-compass-outline" size={26} color={tintColor} />
-        ),
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: '发现',
+            tabBarIcon: ({tintColor}) => (
+                <Icon name="ios-compass-outline" size={26} color={tintColor} />
+            ),
+            headerStyle:{
+                backgroundColor:'#242529',
+                height: 45
+            },
+            headerTintColor:'#fff',
+            //再放一个按钮
+            headerRight: (
+                <Button
+                    onPress = {() => alert("我是按钮")}
+                    title = "按钮"
+                />
+            ),
+            headerLeft: (
+                <Button
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="Info"
+                />
+            ),
+        }
     };
+
     render(){
         return (
             <View style={[styles.container,styles.findBody]}>
@@ -97,3 +120,11 @@ const styles = StyleSheet.create({
         borderTopColor:'#EBEBEB'
     }
 });
+
+const FindStackDetailScreen = createStackNavigator({
+    find: {
+        screen: FindScreen,
+    },
+})
+
+module.exports = FindStackDetailScreen;

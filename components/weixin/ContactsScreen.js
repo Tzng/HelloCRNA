@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet,View, Text,Button,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from 'react-navigation';
 
 //通讯录组件
 export default class ContactsScreen extends React.Component {
@@ -9,6 +10,12 @@ export default class ContactsScreen extends React.Component {
         tabBarIcon: ({tintColor}) => (
             <Icon name="ios-contacts-outline" size={26} color={tintColor} />
         ),
+        headerStyle:{
+            backgroundColor:'#242529',
+            height: 45
+        },
+        headerTintColor:'#fff',
+        headerRight:(<Icon name="ios-mail" color="#fff" size={25} style={{marginRight:20}}/>),
     };
     render(){
         return (
@@ -108,3 +115,12 @@ const styles = StyleSheet.create({
         borderTopColor:'#EBEBEB'
     }
 });
+
+//然后把这个组件放到堆栈导航里面去
+const ContactsStackScreen = createStackNavigator({
+    contacts:{
+        screen: ContactsScreen
+    }
+})
+
+module.exports = ContactsStackScreen;

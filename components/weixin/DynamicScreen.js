@@ -115,7 +115,7 @@ const DynamicStackScreen = createStackNavigator(
             }
         },
         // DynamicDetailScreen 就是一个将要显示在屏幕上的 React 组件
-        dynamicdetail: {
+        dynamicDetail2: {
             // 可选的：当在 Web 应用程序中进行深度链接或使用 react-navigation 时，才会用到 path
             path: 'dynamicdetail/:name',
             // 当 DynamicDetailScreen 被 StackNavigator 加载的时候，它会被赋予一个 navigation 属性

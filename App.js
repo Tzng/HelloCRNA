@@ -1,209 +1,110 @@
 import React from 'react';
-import { Button, View, Text ,TextInput, StyleSheet, Image} from 'react-native';
-import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View, Image, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-//获取屏幕的宽度
-const Dimensions = require('Dimensions');
-const ScreenWidth = Dimensions.get('window').width;
+import FindScreen from  './components/weixin/FindScreen'
+import DynamicScreen from  './components/weixin/DynamicScreen'
+import ContactsScreen from  './components/weixin/ContactsScreen'
+import MyScreen from  './components/weixin/MyScreen'
+import DynamicDetailScreen from  './components/weixin/DynamicDetailScreen'
 
-class LogoTitle extends React.Component {
-    render(){
-        return (
-            <Image
-                source={require('./images/icon3.png')}
-                style={{ width: 30, height: 30 }}
-            />
-        )
-    }
-}
-
-class HomeScreen extends React.Component{
-
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: '首页',
-            headerStyle: {
-                backgroundColor: '#f4511e',
-            },
-            headerTitleColor: "#fff",
-            headerTitleStyle: {
-                fontWeight:'bold',
-            },
-            //再放一个按钮
-            headerRight: (
-                <Button
-                    onPress = {() => alert("我是按钮")}
-                    title = "按钮"
-                />
-            ),
-            headerLeft: (
-                <Button
-                    onPress={() => navigation.navigate('MyModal')}
-                    title="Info"
-                />
-            ),
-            //放了一个图片
-            headerTitle: <LogoTitle />,
-        }
-    };
-
-    render() {
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Home Screen</Text>
-                <Button
-                    title="Go to Details"
-                    //onPress={() => this.props.navigation.navigate('Details')}
-                    //导航栏传递参数
-                    onPress={() => this.props.navigation.navigate('Details',{
-                        itemId:86,
-                        otherParam: '其他参数'
-                    })}
-                />
-            </View>
-        );
-    }
-}
-
-class DetailsScreen extends React.Component {
-
-    //通过获取参数来显示头部内容，返回一个对象
-    static navigationOptions = ({ navigation, navigationOptions }) => {
-        //使用getParam来获取传递的参数，可以配置两个属性，如果itemId没有获取到，那么就返回后面那个
-        const titleNum = navigation.getParam('itemId', '没有参数哦').toString();
-        //如果这么取的话，可能会出现params为undefined的情况
-        const {params} = navigation.state;
-        console.log(titleNum);
-
-        return {
-            //由于java的原因，所以这个必须得是字符串
-            title: titleNum,
-            headerStyle: {
-                backgroundColor: navigationOptions.headerTintColor,
-            },
-            headerTintColor: navigationOptions.headerStyle.backgroundColor,
-        }
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            titleText: ""
-        }
-    }
-
-    render() {
-
-        /* 得到这些参数，然后 */
-        const {navigation} = this.props;
-        const itemId = navigation.getParam('itemId', 'NO-ID');
-        //getParam获取路由传递的参数，一般是由列表页到详情页进行的
-        const otherParam = navigation.getParam('otherParam', 'some default value');
-
-        return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text>Details Screen</Text>
-                <Text>itemId: {JSON.stringify(itemId)}</Text>
-                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-                <Button
-                    title="Go to Details... again"
-                    onPress={() => this.props.navigation.push('Details')}
-                />
-                <Button
-                    title="传递个参数试试啊"
-                    onPress={() => this.props.navigation.push('Details', {
-                        itemId: Math.floor(Math.random() * 100)
-                    })}
-                />
-                <Button
-                    title="跳转到指定的组件去"
-                    onPress={() => this.props.navigation.navigate('Home')}
-                />
-                <Button
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
-                />
-                <Button
-                    title="让我们跳转到顶部去吧"
-                    onPress={() => this.props.navigation.popToTop()}
-                />
-                <Button
-                    title="回到堆里去"
-                    onPress={() => this.props.navigation.pop()}
-                />
-                <Button
-                    title="修改标题"
-                    onPress={() => this.props.navigation.setParams({itemId: this.state.titleText})}
-                />
-                <Button
-                    title="打开一个新窗口"
-                    onPress={() => this.props.navigation.navigate('MyModal')}
-                />
-                <TextInput
-                    style={{width: 80, height: 80,}}
-                    placeholder="请输入标题"
-                    onChangeText={(text) => this.setState({titleText: text})}
-                ></TextInput>
-            </View>
-        );
-    }
-}
-
-class ModalScreen extends React.Component {
-    render() {
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-                <Button
-                    onPress={() => this.props.navigation.goBack()}
-                    title="Dismiss"
-                />
-            </View>
-        );
-    }
-}
-
-const MainStack  = createStackNavigator(
+const RootTabs = createMaterialTopTabNavigator(
     {
-        Home: {
-            screen: HomeScreen,
+        dynamic: {
+            screen: DynamicScreen,
+            navigationOptions:{
+                title: '动态',
+                tabBarIcon: ({tintColor}) => (
+                    <Icon name="ios-text-outline" size={26} color={tintColor} />
+                ),
+            }
         },
-        Details: {
-            screen: DetailsScreen,
+        contacts: {
+            screen: ContactsScreen,
+            navigationOptions:{
+                title: '通讯录',
+                tabBarIcon: ({tintColor}) => (
+                    <Icon name="ios-contacts-outline" size={26} color={tintColor} />
+                ),
+            }
         },
+        find: {
+            screen: FindScreen,
+            navigationOptions:{
+                title: '发现',
+                tabBarIcon: ({tintColor}) => (
+                    <Icon name="ios-compass-outline" size={26} color={tintColor} />
+                ),
+            }
+        },
+        my:{
+            screen:MyScreen,
+            navigationOptions:{
+                title: '我的',
+                tabBarIcon: ({tintColor}) => (
+                    <Icon name="ios-person-outline" size={26} color={tintColor} />
+                ),
+            }
+        }
     },
     {
-        initialRouteName: 'Home',
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: '#f4511e',
+        title:"你好啊",
+        initialRouteName: 'dynamic',
+        tabBarPosition: 'bottom',//选项卡位置
+        animationEnabled: true,
+        tabBarOptions: {
+            activeTintColor: '#28a745',//选中颜色
+            inactiveTintColor:'#232323',//未选中颜色
+            //设置选项卡的背景颜色
+            style: {
+                backgroundColor: '#F2F2F2'
             },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
+            //去掉安卓点击之后的小黄线
+            indicatorStyle: {
+                height: 0
             },
+            //是否显示icon图标
+            showIcon:true,
+            //选项卡样式
+            tabStyle:{
+                height:46,
+            },
+            //icon样式
+            iconStyle:{
+                marginBottom:-6,
+                marginTop:10
+            }
         }
-    }
-);
+    });
 
-const RootStack = createStackNavigator(
-    {
-        Main: {
-            screen: MainStack,
-        },
-        MyModal: {
-            screen: ModalScreen,
-        },
+// myapp路由
+const MyApp = createStackNavigator({
+    dynamicStack: {
+        screen: RootTabs,
     },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-        //因为样式都在组件内部实现了，所以这里都不用写了
-    }
-);
+    dynamicDetail: {
+        path: 'dynamicDetail/:name',
+        screen: DynamicDetailScreen,
+    },
+},{
+    //每个组件都使用自带的头部，所以，就不显示头部了
+    headerMode: 'none'
+});
 
-export default class App extends React.Component {
-    render() {
-        return <RootStack />;
+
+//组件样式
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+
+    //header样式
+    headerBar:{
+        backgroundColor:'#242529',
+        height: 45
     }
-}
+});
+
+
+export default MyApp;

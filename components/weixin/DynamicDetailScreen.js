@@ -16,7 +16,6 @@ class DynamicDetailScreen extends React.Component {
             />
         );
 
-        let num = 10;
         if(params.isActive){
             headerRight = () => (
                 <ActivityIndicator/>
@@ -29,6 +28,9 @@ class DynamicDetailScreen extends React.Component {
             headerTintColor:'#fff',
             title: navigation.state.params.name,
             headerRight: headerRight(),
+            tabBarIcon: ({tintColor}) => (
+                <Icon name="ios-compass-outline" size={26} color={tintColor} />
+            ),
         })
     }
 
@@ -74,9 +76,9 @@ const styles = StyleSheet.create({
 
 // 路由，这里的话会自带头部，所以还要对头部进行修改
 const DynamicStackDetailScreen = createStackNavigator({
-    my: {
+    dynamicdetail: {
         screen: DynamicDetailScreen,
     },
 })
 
-module.exports = DynamicDetailScreen;
+module.exports = DynamicStackDetailScreen;
