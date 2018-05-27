@@ -1,10 +1,22 @@
 import React from 'react';
-import { Button, View, Text ,TextInput, StyleSheet} from 'react-native';
+import { Button, View, Text ,TextInput, StyleSheet, Image} from 'react-native';
 import { createStackNavigator } from 'react-navigation'; // Version can be specified in package.json
 
 //获取屏幕的宽度
 const Dimensions = require('Dimensions');
 const ScreenWidth = Dimensions.get('window').width;
+
+class LogoTitle extends React.Component {
+    render(){
+        return (
+            <Image
+                source={require('./images/icon3.png')}
+                style={{ width: 30, height: 30 }}
+            />
+        )
+    }
+}
+
 class HomeScreen extends React.Component {
 
     static navigationOptions = {
@@ -16,6 +28,8 @@ class HomeScreen extends React.Component {
         headerTitleStyle: {
             fontWeight:'bold',
         },
+        //放了一个图片
+        headerTitle: <LogoTitle />,
     };
 
     render() {
