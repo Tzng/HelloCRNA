@@ -17,26 +17,34 @@ class LogoTitle extends React.Component {
     }
 }
 
-class HomeScreen extends React.Component {
+class HomeScreen extends React.Component{
 
-    static navigationOptions = {
-        title: '首页',
-        headerStyle: {
-            backgroundColor: '#f4511e',
-        },
-        headerTitleColor: "#fff",
-        headerTitleStyle: {
-            fontWeight:'bold',
-        },
-        //再放一个按钮
-        headerRight: (
-            <Button
-                onPress = {() => alert("我是按钮")}
-                title = "按钮"
-            />
-        ),
-        //放了一个图片
-        headerTitle: <LogoTitle />,
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: '首页',
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+            headerTitleColor: "#fff",
+            headerTitleStyle: {
+                fontWeight:'bold',
+            },
+            //再放一个按钮
+            headerRight: (
+                <Button
+                    onPress = {() => alert("我是按钮")}
+                    title = "按钮"
+                />
+            ),
+            headerLeft: (
+                <Button
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="Info"
+                />
+            ),
+            //放了一个图片
+            headerTitle: <LogoTitle />,
+        }
     };
 
     render() {
@@ -127,6 +135,10 @@ class DetailsScreen extends React.Component {
                     title="修改标题"
                     onPress={() => this.props.navigation.setParams({itemId: this.state.titleText})}
                 />
+                <Button
+                    title="打开一个新窗口"
+                    onPress={() => this.props.navigation.navigate('MyModal')}
+                />
                 <TextInput
                     style={{width: 80, height: 80,}}
                     placeholder="请输入标题"
@@ -137,7 +149,21 @@ class DetailsScreen extends React.Component {
     }
 }
 
-const RootStack = createStackNavigator(
+class ModalScreen extends React.Component {
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 30 }}>This is a modal!</Text>
+                <Button
+                    onPress={() => this.props.navigation.goBack()}
+                    title="Dismiss"
+                />
+            </View>
+        );
+    }
+}
+
+const MainStack  = createStackNavigator(
     {
         Home: {
             screen: HomeScreen,
@@ -157,6 +183,22 @@ const RootStack = createStackNavigator(
                 fontWeight: 'bold',
             },
         }
+    }
+);
+
+const RootStack = createStackNavigator(
+    {
+        Main: {
+            screen: MainStack,
+        },
+        MyModal: {
+            screen: ModalScreen,
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
+        //因为样式都在组件内部实现了，所以这里都不用写了
     }
 );
 
