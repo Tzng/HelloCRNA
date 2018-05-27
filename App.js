@@ -49,7 +49,6 @@ const RootTabs = createMaterialTopTabNavigator(
         }
     },
     {
-        title:"你好啊",
         initialRouteName: 'dynamic',
         tabBarPosition: 'bottom',//选项卡位置
         animationEnabled: true,
@@ -82,6 +81,40 @@ const RootTabs = createMaterialTopTabNavigator(
 const MyApp = createStackNavigator({
     dynamicStack: {
         screen: RootTabs,
+        navigationOptions:({ navigation }) => {
+
+            const {index} = navigation.state;
+
+            let headerJson = {
+                headerStyle: {
+                    backgroundColor: '#242529',
+                    height: 45
+                },
+                headerTintColor: '#fff',
+            };
+
+            console.log(index);
+            if(index == '0'){
+                headerJson.title = '动态'
+                headerJson.headerRight = (<Icon name="md-add" color="#fff" size={20} style={{marginRight:20}}/>);
+            }else if (index == '1'){
+                headerJson.title = '通讯录'
+                headerJson.headerRight = (<Icon name="ios-mail" color="#fff" size={25} style={{marginRight:20}}/>);
+            }else if (index == '2'){
+                headerJson.title = '发现';
+                headerJson.headerRight = (
+                    <Button
+                        onPress = {() => alert("我是按钮")}
+                        title = "按钮"
+                    />
+                );
+            }else{
+                headerJson.title = '我的';
+                headerJson.headerRight = (<Icon name="ios-mail" color="#fff" size={25} style={{marginRight:20}}/>)
+            };
+            console.log(headerJson);
+            return headerJson
+        }
     },
     dynamicDetail: {
         path: 'dynamicDetail/:name',
@@ -89,7 +122,7 @@ const MyApp = createStackNavigator({
     },
 },{
     //每个组件都使用自带的头部，所以，就不显示头部了
-    headerMode: 'none'
+    //headerMode: 'none'
 });
 
 
@@ -106,5 +139,8 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default MyApp;
+export default class App extends React.Component {
+    render() {
+        return <MyApp />;
+    }
+}

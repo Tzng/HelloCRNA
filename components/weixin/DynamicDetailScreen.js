@@ -81,4 +81,4 @@ const DynamicStackDetailScreen = createStackNavigator({
     },
 })
 
-module.exports = DynamicStackDetailScreen;
+module.exports = DynamicDetailScreen;
