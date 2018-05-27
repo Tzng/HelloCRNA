@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet,View, Text,Button,Image } from 'react-native';
+import { FlatList, StyleSheet,View, Text,Button,Image,StatusBar,WebView,TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation';
 import DynamicDetailScreen from './DynamicDetailScreen';
@@ -30,18 +30,50 @@ export default class DynamicScreen extends React.Component {
                             {key:'10',name:'啊',text:'说真的没有媒体的报道 谁知道大山深处的苦难啊 希望媒体多多关注社会弱势群体 大山深处还有很多很多的冰花男孩呢',time:'2017-01-02 10:20:33'}
                         ]}
                         renderItem={({item}) => (
-                            <View style={styles.item}>
-                                <View style={{flex:1}}>
-                                    <Text><Icon name="ios-chatboxes-outline" color="#000" size={30} /></Text>
+                            <TouchableHighlight>
+                                <View style={styles.item}>
+                                    <View style={{flex:1}}>
+                                        <Text><Icon name="ios-chatboxes-outline" color="#000" size={30} /></Text>
+                                    </View>
+                                    <View style={{flex:9}}>
+                                        <Text onPress={() => this.props.navigation.navigate('find')} style={styles.name}>{item.name}</Text>
+                                        <Text onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})} style={styles.text}>{item.text}</Text>
+                                        <Button title="详情" onPress={()=> {console.log(this.props.navigation);this.props.navigation.push('dynamicDetail',{name:item.name})}}></Button>
+                                        <Text style={styles.time}>{item.time}</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:9}}>
-                                    <Text onPress={() => this.props.navigation.navigate('find')} style={styles.name}>{item.name}</Text>
-                                    <Text onPress={() => this.props.navigation.navigate('dynamicDetail',{name:'6666'})} style={styles.text}>{item.text}</Text>
-                                    <Button title="详情" onPress={()=> {console.log(this.props.navigation);this.props.navigation.push('dynamicDetail',{name:item.name})}}></Button>
-                                    <Text style={styles.time}>{item.time}</Text>
-                                </View>
-                            </View>
+                            </TouchableHighlight>
                         )}
+                        ItemSeparatorComponent = {
+                            () => (
+                                <View style={{backgroundColor:'#EBEBEB',height:5}}>
+
+                                </View>
+                            )
+                        }
+
+                        ListEmptyComponent = {
+                            () => (
+                                <View style={{flex:1}}><Text>暂无数据</Text></View>
+                            )
+                        }
+
+                        ListHeaderComponent={
+                            ()=>(
+                                <View style={{height:40,justifyContent:'center',alignItems:'center'}}>
+                                    <Text>有新动态</Text>
+                                </View>
+                            )
+                        }
+
+                        ListFooterComponent = {
+                            () => (
+                                <View style={{height:40,justifyContent:'center',alignItems:'center'}}>
+                                    <Text>我是有底线的</Text>
+                                </View>
+                            )
+                        }
+
                     />
                 </View>
             </View>
